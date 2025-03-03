@@ -1,0 +1,65 @@
+Key Variables
+imageCount = how many images total
+imageWidth = width of each image
+totalWidth = full width of the strip (all images side by side)
+leftPosition = how far to shift the strip to show the correct image
+counter = which image you’re on (0 = first image)
+
+---
+
+🔎 Version 1 — Basic Slideshow (Infinite Loop, Simple)
+This is a pretty standard manual slideshow — you’re just sliding the ul left or
+right using animate(). When you hit the end, the counter loops back to 0.
+
+Key Things
+✅ On next click, counter++ moves you forward.
+✅ On previous click, counter-- moves you back.
+✅ If counter gets too high (at the end), it resets to 0 (first image).
+✅ If counter goes negative (at the beginning), it wraps to the last image.
+
+Animation
+
+- $('#slider ul').animate({left: leftPosition}, 700, 'easeInQuad');
+- Moves the whole image strip to the correct spot.
+- easeInQuad is a fancy easing animation (slows in smoothly).
+  Simple, but no cloning. Just shifts and loops.
+
+---
+
+🔎 Version 2 — Fancy Cloning Version (Seamless Looping)
+This one is more advanced — it creates a clone of the ul at the end or start so the animation feels smoother and can wrap seamlessly.
+
+Key Differences
+✅ When you hit the last image (counter === imageCount), it:
+
+- Clones the ul
+- Appends the clone to #slider
+- Puts the new ul just off-screen to the right.
+- Slides the new ul into place.
+- Slides the old ul off the screen.
+- Deletes the old ul.
+  ✅ The same logic applies when moving backwards from the first slide — it clones the ul and puts it off-screen to the left.
+
+Why Clone?
+This avoids a “jump” effect when the slideshow resets. Instead of snapping back to the first slide, it looks like it keeps sliding smoothly. Much more pro-looking.
+
+---
+
+💡 Key jQuery Methods Used
+Method & What It Does
+.on('load') Runs the whole thing after the page loads.
+.click() Adds the click handler.
+.animate() Moves the slideshow left/right.
+.clone() Duplicates the ul to create smooth looping.
+.appendTo() Adds the cloned ul at the end of #slider.
+.remove() Deletes the old ul after the animation.
+.css() Sets the initial width and positioning for the ul.
+
+✍️ Big Takeaways:
+
+- counter tracks which image is visible.
+- leftPosition calculates how far to move the whole ul.
+- Basic slideshows just animate the ul left/right.
+- Fancier slideshows clone ul to make wrapping smoother.
+- Easing (easeInQuad) gives a smoother animation feel.
+- .animate() is a core jQuery method you’ll use a lot.

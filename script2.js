@@ -50,7 +50,7 @@ $(window).on('load', function(){
             $("#slider ul").last().css("left", `-${totalWidth}`);
             leftPosition = `-${counter * imageWidth}px`;
             $("#slider ul").last().animate({left: leftPosition}, 700, "easeInQuad");
-            $("#slider ul").first().animate({left: imageWidth + "px"}, 700, "easeInQuad", function (){
+            $("#slider ul").first().animate({left: `${imageWidth}px`}, 700, "easeInQuad", function (){
                 $("#slider ul").first().remove();
             });
         }else{
